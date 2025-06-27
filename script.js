@@ -7,7 +7,29 @@ function mostraPalavraChave() {
     //alert("Fui clicado!")
     const texto = document.querySelector('#entrada-de-texto').value;
     const campoResultado = document.querySelector('#resultado-palavrachave');
-    const palavras = texto.split(" ")
+    const palavras = processaTexto(texto);
 
     campoResultado.textContent = palavras.join(", ");
+}
+
+function processaTexto(texto) {
+    //let palavras = texto.split(/\s+/);
+    //let palavras = texto.split(/\[a-zA-Z]+/);
+    let palavras = texto.split("/\p{L}+/u/") 
+    /* \P negação; {L} conjunto de letras; + uma ou mais ocorrencias; u Unicode*/
+
+    let frequencias = [];
+
+    for (let i in palavras) {
+        frequencias[i] = 0;
+        for (let j in palavras) {
+            if palavras[i] == palavras [j]) {
+                frequencias[i]++;
+            }
+        }
+    }
+
+    console.log(frequencias);
+
+    return palavras
 }

@@ -18,18 +18,25 @@ function processaTexto(texto) {
     let palavras = texto.split("/\p{L}+/u/") 
     /* \P negação; {L} conjunto de letras; + uma ou mais ocorrencias; u Unicode*/
 
-    let frequencias = [];
+    const frequencias = contaFrequencias(palavras);
+    
+    let ordenadas = Objeto.keys(frequencias).sort(OrdenaPalavra);
+    function ordenaPalavra(p1, p2) {
+        return frequencias[p2] - frequencias[p1];
+    }
 
+    }
+
+    function contaFrequencias(palavras) { 
+    let frequencias = {};
     for (let i in palavras) {
         frequencias[i] = 0;
-        for (let j in palavras) {
-            if palavras[i] == palavras [j]) {
+        for (let j of palavras) {
+            if (i == j) {
                 frequencias[i]++;
             }
         }
     }
+    }
 
-    console.log(frequencias);
-
-    return palavras
-}
+    return palavras;
